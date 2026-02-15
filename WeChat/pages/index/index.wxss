@@ -1,0 +1,465 @@
+/* pages/index/index.wxss */
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background: #f5f5f5;
+  }
+  
+  .search-bar {
+    padding: 10px 15px;
+    background: #07c160;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  
+  .search-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border-radius: 20px;
+    height: 40px;
+    padding: 0 15px;
+  }
+  
+  .search-input {
+    flex: 1;
+    height: 100%;
+    font-size: 14px;
+    color: #333;
+    border: none;
+    outline: none;
+  }
+  
+  .search-input::placeholder {
+    color: #999;
+  }
+  
+  .clear-btn {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ddd;
+    border-radius: 50%;
+    margin-left: 10px;
+  }
+  
+  .clear-icon {
+    font-size: 14px;
+    color: #666;
+    line-height: 1;
+  }
+  
+  .search-icon {
+    margin-left: 10px;
+  }
+  
+  .search-icon-text {
+    font-size: 16px;
+    color: #999;
+  }
+  
+  .search-info {
+    padding: 10px 15px;
+    background: #f0f9ff;
+    color: #1989fa;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #e6f7ff;
+  }
+  
+  .product-list {
+    flex: 1;
+    padding: 10px;
+    overflow: auto;
+  }
+  
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .product-item {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    display: flex;
+    flex-direction: column;
+    height: 200px;
+  }
+  
+  .product-item.selected {
+    border-color: #07c160;
+    transform: scale(0.98);
+    box-shadow: 0 4px 12px rgba(7, 193, 96, 0.2);
+  }
+  
+  .product-image {
+    width: 100%;
+    height: 160px;
+    background: #fafafa;
+    display: block;
+  }
+  
+  .product-info {
+    padding: 8px 10px 10px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .product-name {
+    font-size: 14px;
+    color: #333;
+    font-weight: 500;
+    margin-bottom: 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  .product-description {
+    font-size: 12px;
+    color: #666;
+    line-height: 1.4;
+    margin-bottom: 6px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    height: 34px;
+  }
+  
+  .product-price {
+    font-size: 16px;
+    font-weight: bold;
+    color: #e64340;
+    margin-top: auto;
+  }
+  
+  .loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 20px;
+  }
+  
+  .loading-spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #07c160;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 10px;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .loading-text {
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .no-more {
+    text-align: center;
+    padding: 20px;
+    color: #999;
+    font-size: 14px;
+  }
+  
+  .no-results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 60px 20px;
+  }
+  
+  .no-data-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.6;
+  }
+  
+  .no-results-title {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 8px;
+  }
+  
+  .no-results-subtitle {
+    font-size: 14px;
+    color: #999;
+  }
+  
+  .action-bar {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    background: #fff;
+    border-top: 1px solid #eee;
+    position: sticky;
+    bottom: 0;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.05);
+  }
+  
+  .selected-product {
+    flex: 1;
+    font-size: 14px;
+    color: #333;
+    margin-right: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  .negotiate-btn {
+    background: #07c160;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 24px;
+    font-size: 14px;
+    font-weight: 500;
+    min-width: 80px;
+    transition: all 0.3s ease;
+  }
+  
+  .negotiate-btn.active {
+    background: #07c160;
+    box-shadow: 0 2px 8px rgba(7, 193, 96, 0.3);
+  }
+  
+  .negotiate-btn.disabled {
+    background: #ddd;
+    color: #999;
+  }
+
+  
+  .input-area input {
+    flex: 1;
+    border: 1rpx solid #ddd;
+    border-radius: 10rpx;
+    padding: 15rpx;
+    margin-right: 15rpx;
+  }
+
+/* ==================== 谈判界面样式 ==================== */
+
+/* 谈判容器 - 类似微信聊天界面 */
+.negotiation-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: #ededed;
+  position: relative;
+}
+
+/* 顶部固定栏 - 只包含系统消息 */
+.negotiation-top-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #fff;
+  border-bottom: 1px solid #d9d9d9;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* 系统消息栏 */
+.system-message-container {
+  background: #fff;
+  padding: 10px 15px;
+}
+
+.system-message-container .message {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin: 0;
+  max-width: 100%;
+}
+
+.system-message-container .message-header {
+  margin-bottom: 6px;
+}
+
+.system-message-container .role-label {
+  font-size: 12px;
+  color: #666;
+  font-weight: 500;
+}
+
+.system-message-container .timestamp {
+  font-size: 11px;
+  color: #999;
+  margin-left: 8px;
+}
+
+.system-message-container .message-content {
+  font-size: 13px;
+  color: #333;
+  line-height: 1.4;
+}
+
+/* 聊天消息区域 */
+.chat-container {
+  flex: 1;
+  padding: 10px;
+  overflow: auto;
+  background: #ededed;
+}
+
+/* 消息容器 - 类似微信布局 */
+.message-container {
+  margin-bottom: 16px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.message-container.user {
+    justify-content: flex-end;
+    margin-top: 8px; /* 新增：向下移动 */
+    margin-right: 10px; /* 新增：向右移动 */
+  }
+  
+  .message-container.user .message {
+    background: #95ec69;
+    color: #000;
+    margin-left: 50px;
+    border-radius: 8px 8px 2px 8px;
+    position: relative;
+    left: 6px; /* 新增：微调向右 */
+    top: 4px; /* 新增：微调向下 */
+  }
+
+.message-container.user .message-header {
+  text-align: right;
+}
+
+/* 商家消息（左侧） */
+.message-container.bot {
+  justify-content: flex-start;
+}
+
+.message-container.bot .message {
+  background: #fff;
+  color: #000;
+  margin-right: 10px;
+  border-radius: 8px 8px 8px 2px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.message-container.bot .message-header {
+  text-align: left;
+}
+
+/* 消息样式 */
+.message {
+  max-width: 85%;
+  padding: 10px 14px;
+  font-size: 16px;
+  line-height: 1.4;
+  word-wrap: break-word;
+  position: relative;
+}
+
+.message-header {
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+}
+
+.role-label {
+  font-weight: 500;
+  color: #666;
+}
+
+.timestamp {
+  color: #999;
+  margin-left: 8px;
+  font-size: 11px;
+}
+
+.message-content {
+  font-size: 16px;
+  line-height: 1.4;
+  color: #000;
+}
+
+/* 修改后的CSS */
+.input-area {
+    position: sticky;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    padding: 8px 15px;
+    background: #f7f7f7;
+    border-top: 1px solid #d9d9d9;
+    box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.1);
+    padding-bottom: max(8px, env(safe-area-inset-bottom));
+    gap: 6px; /* 缩小按钮间距 */
+  }
+  
+  .chat-input {
+    flex: 1; /* 输入框占据剩余空间 */
+    min-height: 36px;
+    max-height: 120px;
+    background: #fff;
+    border: 1px solid #d9d9d9;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 16px;
+    line-height: 1.4;
+    width: calc(100% - 112px); /* 计算宽度，留出按钮空间 */
+  }
+  
+  .send-btn, .end-btn {
+    /* 统一按钮样式 */
+    border-radius: 6px;
+    padding: 0 0px; /* 减少水平内边距 */
+    height: 36px;
+    line-height: 36px;
+    font-size: 14px;
+    border: none;
+    font-weight: 50;
+    min-width: 18px; /* 缩小最小宽度 */
+    max-width: 70px;
+    flex-shrink: 0; /* 防止按钮被压缩 */
+  }
+  
+  .send-btn {
+    background: #07c160;
+    color: rgb(3, 3, 3);
+  }
+  
+  .end-btn {
+    background: #ff4757;
+    color: rgb(20, 20, 20);
+  }
+  
+  /* 按钮点击效果 */
+  .send-btn:active {
+    background: #06ad56;
+  }
+  
+  .end-btn:active {
+    background: #ff3742;
+  }

@@ -1,0 +1,137 @@
+<!-- pages/index/index.wxml -->
+<view class="container">
+<!-- 商品浏览区域 -->
+<view wx:if="{{!isNegotiating}}">
+  <!-- 搜索框 -->
+  <view class="search-bar">
+    <view class="search-input-wrapper">
+      <input 
+        class="search-input"
+        type="text"
+        placeholder="Enter product name, ID, or price"
+        value="{{searchKeyword}}"
+        bindinput="onSearchInput"
+        confirm-type="search"
+        bindconfirm="onSearchConfirm"
+      />
+      <view wx:if="{{searchKeyword}}" class="clear-btn" bindtap="clearSearch">
+        <text class="clear-icon">×</text>
+      </view>
+      <view wx:else class="search-icon">
+        <text class="search-icon-text">🔍</text>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 搜索提示 -->
+  <view wx:if="{{searching}}" class="search-info">
+    <text>搜索"{{searchKeyword}}"</text>
+    <text wx:if="{{displayedProducts.length > 0}}">找到 {{displayedProducts.length}} 个商品</text>
+  </view>
+  
+  <!-- 商品列表 -->
+  <scroll-view 
+    scroll-y 
+    class="product-list"
+    bindscrolltolower="onReachBottom"
+  >
+    <!-- 商品项网格布局 -->
+    <view class="product-grid">
+      <block wx:for="{{displayedProducts}}" wx:key="id">
+        <view 
+          class="product-item {{selectedProduct && selectedProduct.id === item.id ? 'selected' : ''}}"
+          bindtap="selectProduct"
+          data-product="{{item}}"
+        >
+          <image src="{{item.image}}" class="product-image" mode="aspectFill"></image>
+          <view class="product-info">
+            <view class="product-name">{{item.name}}</view>
+            <view class="product-description">{{item.description}}</view>
+            <view class="product-price">¥{{item.basePrice}}</view>
+          </view>
+        </view>
+      </block>
+    </view>
+    
+    <!-- 加载状态 -->
+    <view wx:if="{{loading}}" class="loading">
+      <view class="loading-spinner"></view>
+      <text class="loading-text">加载中...</text>
+    </view>
+    
+    <!-- 没有更多了 -->
+    <view wx:if="{{!hasMore && !searching && displayedProducts.length > 0}}" class="no-more">没有更多商品了</view>
+    
+    <!-- 无搜索结果 -->
+    <view wx:if="{{searching && displayedProducts.length === 0 && !loading}}" class="no-results">
+      <view class="no-data-icon">📦</view>
+      <text class="no-results-title">没有找到匹配的商品</text>
+      <text class="no-results-subtitle">请尝试其他关键词</text>
+    </view>
+  </scroll-view>
+  
+  <!-- 底部操作栏 -->
+  <view class="action-bar">
+    <view wx:if="{{selectedProduct}}" class="selected-product">
+      已选: {{selectedProduct.name}} (¥{{selectedProduct.basePrice}})
+    </view>
+    <button 
+      class="negotiate-btn {{selectedProduct ? 'active' : 'disabled'}}"
+      bindtap="startNegotiation"
+      disabled="{{!selectedProduct}}"
+    >
+    Start negotiating
+    </button>
+  </view>
+</view>
+<!-- 谈判区域 - 重新设计布局 -->
+<view wx:else class="negotiation-container">
+  <!-- 顶部固定栏 - 只保留系统消息 -->
+  <view class="negotiation-top-bar">
+    <!-- 系统消息 - 固定在顶部 -->
+    <view wx:if="{{messages[0] && messages[0].role === 'system'}}" class="system-message-container">
+      <view class="message">
+        <view class="message-header">
+          <text class="role-label">System prompt</text>
+          <text class="timestamp">{{messages[0].timestamp}}</text>
+        </view>
+        <view class="message-content">{{messages[0].content}}</view>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 聊天消息区域 -->
+  <scroll-view scroll-y scroll-top="{{scrollTop}}" class="chat-container">
+    <block wx:for="{{messages}}" wx:key="id" wx:if="{{index > 0 || messages[0].role !== 'system'}}">
+      <view class="message-container {{item.role}}">
+        <view class="message">
+          <view class="message-header">
+            <text class="role-label">
+              <text wx:if="{{item.role === 'user'}}">Me</text>
+              <text wx:elif="{{item.role === 'bot'}}">商家</text>
+              <text wx:else>System Agent</text>
+            </text>
+            <text class="timestamp">{{item.timestamp}}</text>
+          </view>
+          <view class="message-content">{{item.content}}</view>
+        </view>
+      </view>
+    </block>
+  </scroll-view>
+  
+  <!-- 输入区域 - 固定在底部，包含结束按钮 -->
+  <view class="input-area" wx:if="{{negotiationStatus === 'ongoing'}}">
+    <input 
+      class="chat-input"
+      value="{{inputValue}}" 
+      bindinput="onInput" 
+      placeholder="Enter your offer or request..."
+      focus="{{autoFocus}}"
+      confirm-type="send"
+      bindconfirm="sendMessage"
+    />
+    <button class="send-btn" bindtap="sendMessage">Send</button>
+    <button class="end-btn" bindtap="endNegotiation">Terminate</button>
+  </view>
+</view>
+</view>
