@@ -9,7 +9,6 @@ import argparse
 import json
 import os
 import pickle
-import random
 import re
 import time
 from dataclasses import dataclass
@@ -23,11 +22,10 @@ from dorea_negotiation import (
     create_price_quantity_domain_from_product,
     nearest_outcome_for_price_quantity,
     offer_to_numbers,
-    offer_to_text_cn,
 )
 
-from src.intent_recognizer import IntentRecognizer
-from src.price_quantity_extractor import PriceQuantityExtractor
+from intent_recognizer import IntentRecognizer
+from price_quantity_extractor import PriceQuantityExtractor
 
 
 # ---------------------------------------------------------------------
@@ -855,7 +853,7 @@ def evaluate_dorea_on_scenes(
         json.dump(results, f, ensure_ascii=False, indent=2)
 
     # compute metrics using the provided module
-    from src.calculator_negotiation_metrics import calculate_and_print_metrics
+    from calculator_negotiation_metrics import calculate_and_print_metrics
     calculate_and_print_metrics(results, output_dir, metrics_filename)
 
     return results

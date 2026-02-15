@@ -13,10 +13,10 @@ import torch
 
 from ecommerce_dataset import as_buyer_context, as_public_context, as_seller_context, load_products_json, sample_product
 from Game import NegotiationGame
-from src.intent_recognizer import IntentRecognizer
+from intent_recognizer import IntentRecognizer
 from llm_client import LLMClient
 from Model import ValueModel
-from src.price_quantity_extractor import PriceQuantityExtractor
+from price_quantity_extractor import PriceQuantityExtractor
 from QMCTS import NegotiationQMCTS
 from seller_response_generator import SellerResponseGenerator
 

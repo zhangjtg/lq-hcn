@@ -15,10 +15,10 @@ from Game import NegotiationGame
 from llm_client import LLMClient
 from Model import ValueModel
 from QMCTS import NegotiationQMCTS
-from src.price_quantity_extractor import PriceQuantityExtractor
-from src.intent_recognizer import IntentRecognizer
+from price_quantity_extractor import PriceQuantityExtractor
+from intent_recognizer import IntentRecognizer
 from seller_response_generator import SellerResponseGenerator
-from src.wechat_service import WeChatService
+from wechat_service import WeChatService
 
 
 def _env(name: str, default: Optional[str] = None) -> Optional[str]:

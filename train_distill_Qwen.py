@@ -14,7 +14,7 @@ from transformers import (
 )  # 替换为适用于分类任务的整理器
 from negotiationData_utils import load_and_sort_data,NegotiationDataset,NegotiationDataCollator
 from torch.utils.data import DataLoader
-from data.template import get_template_and_fix_tokenizer
+from utils.template import get_template_and_fix_tokenizer
 
 
 class TaskPrefixTrainer(Seq2SeqTrainer):  #

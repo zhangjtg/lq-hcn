@@ -18,9 +18,9 @@ if _CUR_DIR not in sys.path:
 
 import torch
 
-from src.calculator_negotiation_metrics import calculate_and_print_metrics
-from src.intent_recognizer import IntentRecognizer
-from src.price_quantity_extractor import PriceQuantityExtractor
+from calculator_negotiation_metrics import calculate_and_print_metrics
+from intent_recognizer import IntentRecognizer
+from price_quantity_extractor import PriceQuantityExtractor
 from mipn import ProductConfig, MiPNSellerAgent
 
 
